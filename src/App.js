@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import { createGlobalStyle } from 'styled-components';
+import Page from './components/Page';
 
-function App() {
+const GlobalStyles = createGlobalStyle`
+  html {
+    --color-primary: hsl(172, 67%, 45%);
+
+    --color-dark-cyan: hsl(183, 100%, 15%);
+    --color-dark-grayish-cyan: hsl(186, 14%, 43%);
+    --color-dark-grayish-cyan-2: hsl(184, 14%, 56%);
+    --color-light-grayish-cyan: hsl(185, 41%, 84%);
+    --color-light-grayish-cyan-2: hsl(189, 41%, 97%);
+    --color-white: (0, 0%, 100%);
+  }
+`;
+
+function App({ children }) {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyles />
+      <Page>{children}</Page>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import TipSelection from './TipSelection';
 
 const StyledCalculatorContainer = styled.div`
   height: 100%;
@@ -29,6 +30,7 @@ export default function Calculator() {
           onChange={handleBillInput}
         />
       </label>
+      <TipSelection />
     </StyledCalculatorContainer>
   );
 }

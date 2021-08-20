@@ -1,13 +1,14 @@
 import Button from './Button';
 
-export default function TipSelection() {
+export default function TipSelection({ setTipAmount }) {
   return (
     <div>
-      <Button amount={5} />
-      <Button amount={10} />
-      <Button amount={15} />
-      <Button amount={25} />
-      <Button amount={50} />
+      <Button setTipAmount={setTipAmount} amount={5} />
+      <Button setTipAmount={setTipAmount} amount={10} />
+      <Button setTipAmount={setTipAmount} amount={15} />
+      <Button setTipAmount={setTipAmount} amount={25} />
+      <Button setTipAmount={setTipAmount} amount={50} />
+      <input type="number" placeholder="custom" />
     </div>
   );
 }

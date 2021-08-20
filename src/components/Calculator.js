@@ -11,12 +11,21 @@ const StyledCalculatorContainer = styled.div`
 `;
 
 export default function Calculator() {
-  const [billAmount, setBillAmount] = useState('');
+  const [billAmount, setBillAmount] = useState(0);
+  const [numberOfPeople, setNumberOfPeople] = useState(1);
+  const [tipAmount, setTipAmount] = useState(0);
+
+  console.log(tipAmount);
 
   function handleBillInput(e) {
     const { value } = e.currentTarget;
     console.log(parseFloat(value));
     setBillAmount(value);
+  }
+
+  function handlePeopleInput(e) {
+    const { value } = e.currentTarget;
+    setNumberOfPeople(value);
   }
 
   return (
@@ -30,7 +39,18 @@ export default function Calculator() {
           onChange={handleBillInput}
         />
       </label>
-      <TipSelection />
+      <TipSelection setTipAmount={setTipAmount} />
+      <label htmlFor="people">
+        Number Of People
+        <input
+          type="number"
+          placeholder="Type in Group Size"
+          value={numberOfPeople}
+          onChange={handlePeopleInput}
+        />
+      </label>
+      <p>Tip Amount / Per Person {tipAmount / billAmount / numberOfPeople}</p>
+      <p>Total / Per Person {billAmount / numberOfPeople}</p>
     </StyledCalculatorContainer>
   );
 }

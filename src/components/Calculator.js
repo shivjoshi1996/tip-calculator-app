@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TipSelection from './TipSelection';
 
@@ -14,18 +14,41 @@ export default function Calculator() {
   const [billAmount, setBillAmount] = useState(0);
   const [numberOfPeople, setNumberOfPeople] = useState(1);
   const [tipAmount, setTipAmount] = useState(0);
+  const [tipAmountPerPerson, setTipAmountPerPerson] = useState(0);
+  const [totalPerPerson, setTotalPerPerson] = useState(0);
 
-  console.log(tipAmount);
+  function calculateTipAmountPerPerson() {
+    const tipPerPerson = billAmount * (tipAmount / numberOfPeople);
+    setTipAmountPerPerson(tipPerPerson);
+    console.log(tipPerPerson);
+  }
+
+  function calculateTotalPerPerson() {
+    const total = billAmount / numberOfPeople + tipAmountPerPerson;
+    setTotalPerPerson(total);
+  }
+
+  useEffect(() => {
+    calculateTipAmountPerPerson();
+  }, [billAmount, numberOfPeople, tipAmount]);
+
+  useEffect(() => {
+    calculateTotalPerPerson();
+  }, [billAmount, numberOfPeople, tipAmount, tipAmountPerPerson]);
 
   function handleBillInput(e) {
     const { value } = e.currentTarget;
-    console.log(parseFloat(value));
     setBillAmount(value);
   }
 
   function handlePeopleInput(e) {
     const { value } = e.currentTarget;
     setNumberOfPeople(value);
+  }
+
+  function handleTipInput(tip) {
+    const calculatedTip = tip / 100;
+    setTipAmount(calculatedTip);
   }
 
   return (
@@ -39,7 +62,9 @@ export default function Calculator() {
           onChange={handleBillInput}
         />
       </label>
-      <TipSelection setTipAmount={setTipAmount} />
+      {
+        // eslint-disable-next-line
+      }<TipSelection handleTipInput={handleTipInput} />
       <label htmlFor="people">
         Number Of People
         <input
@@ -49,8 +74,8 @@ export default function Calculator() {
           onChange={handlePeopleInput}
         />
       </label>
-      <p>Tip Amount / Per Person {tipAmount / billAmount / numberOfPeople}</p>
-      <p>Total / Per Person {billAmount / numberOfPeople}</p>
+      <p>Tip Amount / Per Person {tipAmountPerPerson}</p>
+      <p>Total / Per Person {totalPerPerson}</p>
     </StyledCalculatorContainer>
   );
 }

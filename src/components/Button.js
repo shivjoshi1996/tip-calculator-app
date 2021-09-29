@@ -15,9 +15,9 @@ const StyledButton = styled.button`
   }
 `;
 
-export default function Button({ amount, setTipAmount }) {
+export default function Button({ amount, handleTipInput }) {
   return (
-    <StyledButton onClick={() => setTipAmount(amount)} type="button">
+    <StyledButton onClick={() => handleTipInput(amount)} type="button">
       {amount}%
     </StyledButton>
   );

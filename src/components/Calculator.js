@@ -4,10 +4,44 @@ import TipSelection from './TipSelection';
 
 const StyledCalculatorContainer = styled.div`
   height: 100%;
-  width: 100vw;
+  width: 100%;
   background-color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  padding-top: 2rem;
+
+  label {
+    color: #5e7a7d;
+    font-weight: bold;
+  }
+
+  input {
+    border: none;
+    background-color: #f3f9fa;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    font-size: 1.5rem;
+    color: #00474b;
+    text-align: right;
+  }
+`;
+
+const StyledTotalsSection = styled.div`
+  background-color: #00474b;
+  width: 90%;
+  margin: 0 auto;
+  border-radius: 15px;
+  padding-top: 2.3125rem;
+  padding-bottom: 1.5rem;
+
+  p {
+    color: white;
+    font-weight: bold;
+  }
+  span {
+    color: #7f9d9f;
+    font-size: 0.8125rem;
+  }
 `;
 
 export default function Calculator() {
@@ -20,7 +54,6 @@ export default function Calculator() {
   function calculateTipAmountPerPerson() {
     const tipPerPerson = billAmount * (tipAmount / numberOfPeople);
     setTipAmountPerPerson(tipPerPerson);
-    console.log(tipPerPerson);
   }
 
   function calculateTotalPerPerson() {
@@ -72,10 +105,21 @@ export default function Calculator() {
           placeholder="Type in Group Size"
           value={numberOfPeople}
           onChange={handlePeopleInput}
+          min="1"
+          step="1"
         />
       </label>
-      <p>Tip Amount / Per Person {tipAmountPerPerson}</p>
-      <p>Total / Per Person {totalPerPerson}</p>
+      <StyledTotalsSection>
+        <p>
+          Tip Amount
+          <br />
+          <span> / Person {tipAmountPerPerson}</span>
+        </p>
+        <p>
+          Total <br />
+          <span> / Person {totalPerPerson}</span>
+        </p>
+      </StyledTotalsSection>
     </StyledCalculatorContainer>
   );
 }

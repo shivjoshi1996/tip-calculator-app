@@ -6,13 +6,14 @@ const StyledCalculatorContainer = styled.div`
   height: 100%;
   width: 100%;
   background-color: white;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-radius: 25px 25px 0px 0px;
   padding-top: 2rem;
+  padding-bottom: 2rem;
 
   label {
     color: #5e7a7d;
     font-weight: bold;
+    padding-bottom: 10px;
   }
 
   input {
@@ -23,25 +24,64 @@ const StyledCalculatorContainer = styled.div`
     font-size: 1.5rem;
     color: #00474b;
     text-align: right;
+    width: 100%;
+    background-image: url('/public/dollaricon.png') no-repeat scroll 7px 7px;
+    margin-bottom: 32px;
   }
 `;
 
 const StyledTotalsSection = styled.div`
   background-color: #00474b;
-  width: 90%;
-  margin: 0 auto;
   border-radius: 15px;
   padding-top: 2.3125rem;
   padding-bottom: 1.5rem;
+  text-align: center;
 
   p {
     color: white;
     font-weight: bold;
+    text-align: left;
   }
   span {
     color: #7f9d9f;
     font-size: 0.8125rem;
   }
+`;
+
+const StyledContentContainer = styled.div`
+  width: 90%;
+  margin: 0 auto;
+`;
+
+const StyledInputsSection = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const StyledTipContent = styled.div`
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+
+  h2 {
+    color: #26c2ae;
+    font-size: 2rem;
+    font-weight: bold;
+  }
+`;
+
+const StyledResetButton = styled.button`
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #00474b;
+  background-color: #26c2ae;
+  border: none;
+  height: 48px;
+  width: 90%;
+  border-radius: 5px;
 `;
 
 export default function Calculator() {
@@ -86,40 +126,56 @@ export default function Calculator() {
 
   return (
     <StyledCalculatorContainer>
-      <label htmlFor="bill">
-        Bill
-        <input
-          type="text"
-          placeholder="Add Total Price of bill"
-          value={billAmount}
-          onChange={handleBillInput}
-        />
-      </label>
-      {
-        // eslint-disable-next-line
+      <StyledContentContainer>
+        <StyledInputsSection>
+          {
+            // eslint-disable-next-line
+           }<label htmlFor="bill">Bill</label>
+          <input
+            type="text"
+            placeholder="Add Total Price of bill"
+            value={billAmount}
+            onChange={handleBillInput}
+            id="bill"
+          />
+          {
+            // eslint-disable-next-line
+      }<label htmlFor="tip"> Select Tip %</label>
+          {
+            // eslint-disable-next-line
       }<TipSelection handleTipInput={handleTipInput} />
-      <label htmlFor="people">
-        Number Of People
-        <input
-          type="number"
-          placeholder="Type in Group Size"
-          value={numberOfPeople}
-          onChange={handlePeopleInput}
-          min="1"
-          step="1"
-        />
-      </label>
-      <StyledTotalsSection>
-        <p>
-          Tip Amount
-          <br />
-          <span> / Person {tipAmountPerPerson}</span>
-        </p>
-        <p>
-          Total <br />
-          <span> / Person {totalPerPerson}</span>
-        </p>
-      </StyledTotalsSection>
+          {
+            // eslint-disable-next-line
+          }<label htmlFor="people">Number Of People</label>
+          <input
+            type="number"
+            placeholder="Type in Group Size"
+            value={numberOfPeople}
+            onChange={handlePeopleInput}
+            min="1"
+            step="1"
+            id="people"
+          />
+        </StyledInputsSection>
+        <StyledTotalsSection>
+          <StyledTipContent>
+            <p>
+              Tip Amount
+              <br />
+              <span> / Person </span>
+            </p>
+            <h2>{`$${tipAmountPerPerson}`}</h2>
+          </StyledTipContent>
+          <StyledTipContent>
+            <p>
+              Total <br />
+              <span> / Person</span>
+            </p>
+            <h2>{`$${totalPerPerson}`}</h2>
+          </StyledTipContent>
+          <StyledResetButton type="button">Reset</StyledResetButton>
+        </StyledTotalsSection>
+      </StyledContentContainer>
     </StyledCalculatorContainer>
   );
 }

@@ -3,8 +3,8 @@ import Calculator from './Calculator';
 import Logo from './Logo';
 
 const StyledPage = styled.div`
-  font-family: 'Space Mono', monospace;
-  background-color: #c5e4e7;
+  font-family: ${({ theme }) => theme.font.main};
+  background-color: ${({ theme }) => theme.colors.lightGrayCyan};
   min-height: 100vh;
 `;
 

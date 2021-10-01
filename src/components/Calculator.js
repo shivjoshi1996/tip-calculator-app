@@ -6,7 +6,7 @@ import roundToTwoDecimalPlace from '../utils/currency';
 const StyledCalculatorContainer = styled.div`
   height: 100%;
   width: 100%;
-  background-color: white;
+  background-color: ${({ theme }) => theme.colors.white};
   border-radius: 25px 25px 0px 0px;
   padding-top: 2rem;
   padding-bottom: 2rem;
@@ -18,22 +18,24 @@ const StyledCalculatorContainer = styled.div`
   }
 
   label {
-    color: #5e7a7d;
+    color: ${({ theme }) => theme.colors.darkGrayCyan};
     font-weight: bold;
     padding-bottom: 10px;
   }
 
   input {
     border: none;
-    background-color: #f3f9fa;
+    background-color: ${({ theme }) => theme.colors.lightGrayCyan2};
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     font-size: 1.5rem;
-    color: #00474b;
+    color: ${({ theme }) => theme.colors.darkCyan};
     text-align: right;
     width: 100%;
     background-image: url('/public/dollaricon.png') no-repeat scroll 7px 7px;
     margin-bottom: 32px;
+    font-weight: bold;
+    border-radius: 5px;
   }
 `;
 
@@ -75,7 +77,7 @@ const StyledTipContent = styled.div`
 `;
 
 const StyledTotalsSection = styled.div`
-  background-color: #00474b;
+  background-color: ${({ theme }) => theme.colors.darkCyan};
   border-radius: 15px;
   padding-top: 2.3125rem;
   padding-bottom: 1.5rem;
@@ -89,12 +91,12 @@ const StyledTotalsSection = styled.div`
   }
 
   p {
-    color: white;
+    color: ${({ theme }) => theme.colors.white};
     font-weight: bold;
     text-align: left;
   }
   span {
-    color: #7f9d9f;
+    color: ${({ theme }) => theme.colors.darkGrayCyan2};
     font-size: 0.8125rem;
   }
 `;
@@ -103,12 +105,18 @@ const StyledResetButton = styled.button`
   font-size: 20px;
   text-transform: uppercase;
   font-weight: bold;
-  color: #00474b;
-  background-color: #26c2ae;
+  color: ${({ theme }) => theme.colors.darkCyan};
+  background-color: ${({ theme }) => theme.colors.primary};
   border: none;
   height: 48px;
   width: 90%;
   border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.lightGrayCyan};
+    color: ${({ theme }) => theme.colors.darkCyan};
+  }
 
   @media (min-width: 768px) {
     margin-top: auto;
@@ -155,6 +163,14 @@ export default function Calculator() {
   function handleTipInput(tip) {
     const calculatedTip = tip / 100;
     setTipAmount(calculatedTip);
+  }
+
+  function resetForm() {
+    setBillAmount(0);
+    setNumberOfPeople(1);
+    setTipAmount(0);
+    setTipAmountPerPerson(0);
+    setTotalPerPerson(0);
   }
 
   return (
@@ -206,7 +222,11 @@ export default function Calculator() {
             </p>
             <h2>{`$${totalPerPerson}`}</h2>
           </StyledTipContent>
-          <StyledResetButton type="button">Reset</StyledResetButton>
+          {
+            // eslint-disable-next-line
+          }<StyledResetButton type="button" onClick={resetForm}>
+            Reset
+          </StyledResetButton>
         </StyledTotalsSection>
       </StyledContentContainer>
     </StyledCalculatorContainer>

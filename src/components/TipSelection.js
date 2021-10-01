@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Button from './Button';
+import TipButton from './TipButton';
 
 const StyledTipGrid = styled.div`
   display: grid;
@@ -20,11 +20,11 @@ export default function TipSelection({ handleTipInput }) {
 
   return (
     <StyledTipGrid>
-      <Button handleTipInput={handleTipInput} amount={5} />
-      <Button handleTipInput={handleTipInput} amount={10} />
-      <Button handleTipInput={handleTipInput} amount={15} />
-      <Button handleTipInput={handleTipInput} amount={25} />
-      <Button handleTipInput={handleTipInput} amount={50} />
+      <TipButton handleTipInput={handleTipInput} amount={5} />
+      <TipButton handleTipInput={handleTipInput} amount={10} />
+      <TipButton handleTipInput={handleTipInput} amount={15} />
+      <TipButton handleTipInput={handleTipInput} amount={25} />
+      <TipButton handleTipInput={handleTipInput} amount={50} />
       <input
         onChange={handleCustomFieldChange}
         type="number"

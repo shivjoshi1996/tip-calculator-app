@@ -6,11 +6,12 @@ import roundToTwoDecimalPlace from '../utils/currency';
 const StyledCalculatorContainer = styled.div`
   height: 100%;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.white};
-  border-radius: 25px 25px 0px 0px;
+  max-width: 920px;
   padding-top: 2rem;
   padding-bottom: 2rem;
-  max-width: 920px;
+  background-color: ${({ theme }) => theme.colors.white};
+  border-radius: 25px 25px 0px 0px;
+  font-weight: bold;
 
   @media (min-width: 768px) {
     border-radius: 25px;
@@ -18,23 +19,21 @@ const StyledCalculatorContainer = styled.div`
   }
 
   label {
+    padding-bottom: 0.625rem;
     color: ${({ theme }) => theme.colors.darkGrayCyan};
-    font-weight: bold;
-    padding-bottom: 10px;
   }
 
   input {
-    border: none;
-    background-color: ${({ theme }) => theme.colors.lightGrayCyan2};
+    width: 100%;
+    margin-bottom: 2rem;
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     font-size: 1.5rem;
-    color: ${({ theme }) => theme.colors.darkCyan};
     text-align: right;
-    width: 100%;
-    background-image: url('/public/dollaricon.png') no-repeat scroll 7px 7px;
-    margin-bottom: 32px;
     font-weight: bold;
+    color: ${({ theme }) => theme.colors.darkCyan};
+    background-color: ${({ theme }) => theme.colors.lightGrayCyan2};
+    border: none;
     border-radius: 5px;
   }
 `;
@@ -59,16 +58,15 @@ const StyledInputsSection = styled.div`
 `;
 
 const StyledTipContent = styled.div`
-  width: 90%;
-  margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  width: 90%;
+  margin: 0 auto;
   margin-bottom: 2rem;
 
   h2 {
-    color: #26c2ae;
     font-size: 2rem;
-    font-weight: bold;
+    color: #26c2ae;
 
     @media (min-width: 768px) {
       font-size: 3rem;
@@ -77,39 +75,38 @@ const StyledTipContent = styled.div`
 `;
 
 const StyledTotalsSection = styled.div`
-  background-color: ${({ theme }) => theme.colors.darkCyan};
-  border-radius: 15px;
   padding-top: 2.3125rem;
   padding-bottom: 1.5rem;
   text-align: center;
+  background-color: ${({ theme }) => theme.colors.darkCyan};
+  border-radius: 15px;
 
   @media (min-width: 768px) {
-    flex: 1;
     display: flex;
+    flex: 1;
     flex-direction: column;
     align-items: center;
   }
 
   p {
-    color: ${({ theme }) => theme.colors.white};
-    font-weight: bold;
     text-align: left;
+    color: ${({ theme }) => theme.colors.white};
   }
   span {
-    color: ${({ theme }) => theme.colors.darkGrayCyan2};
     font-size: 0.8125rem;
+    color: ${({ theme }) => theme.colors.darkGrayCyan2};
   }
 `;
 
 const StyledResetButton = styled.button`
-  font-size: 20px;
-  text-transform: uppercase;
+  width: 90%;
+  height: 3rem;
+  font-size: 1.25rem;
   font-weight: bold;
   color: ${({ theme }) => theme.colors.darkCyan};
+  text-transform: uppercase;
   background-color: ${({ theme }) => theme.colors.primary};
   border: none;
-  height: 48px;
-  width: 90%;
   border-radius: 5px;
   cursor: pointer;
 

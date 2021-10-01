@@ -6,11 +6,11 @@ const StyledLogo = styled.h1`
   font-weight: 700;
   letter-spacing: 0.8rem;
   color: #3d6666;
-  padding: 50px 0px;
+  padding: 3.125rem 0rem;
 
   @media (min-width: 768px) {
-    padding-top: 163px;
-    padding-bottom: 88px;
+    padding-top: 10.1875rem;
+    padding-bottom: 5.5rem;
   }
 `;
 

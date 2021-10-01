@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TipSelection from './TipSelection';
+import roundToTwoDecimalPlace from '../utils/currency';
 
 const StyledCalculatorContainer = styled.div`
   height: 100%;
@@ -66,6 +67,10 @@ const StyledTipContent = styled.div`
     color: #26c2ae;
     font-size: 2rem;
     font-weight: bold;
+
+    @media (min-width: 768px) {
+      font-size: 3rem;
+    }
   }
 `;
 
@@ -78,6 +83,9 @@ const StyledTotalsSection = styled.div`
 
   @media (min-width: 768px) {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
 
   p {
@@ -101,6 +109,10 @@ const StyledResetButton = styled.button`
   height: 48px;
   width: 90%;
   border-radius: 5px;
+
+  @media (min-width: 768px) {
+    margin-top: auto;
+  }
 `;
 
 export default function Calculator() {
@@ -112,12 +124,14 @@ export default function Calculator() {
 
   function calculateTipAmountPerPerson() {
     const tipPerPerson = billAmount * (tipAmount / numberOfPeople);
-    setTipAmountPerPerson(tipPerPerson);
+    const tipPerPersonRounded = roundToTwoDecimalPlace(tipPerPerson);
+    setTipAmountPerPerson(tipPerPersonRounded);
   }
 
   function calculateTotalPerPerson() {
     const total = billAmount / numberOfPeople + tipAmountPerPerson;
-    setTotalPerPerson(total);
+    const totalRounded = roundToTwoDecimalPlace(total);
+    setTotalPerPerson(totalRounded);
   }
 
   useEffect(() => {

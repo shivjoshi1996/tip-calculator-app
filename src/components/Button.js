@@ -4,7 +4,7 @@ const StyledButton = styled.button`
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => (props.active ? '#26C2AE' : '#00474B')};
+  background-color: #00474b;
   font-size: 1.5rem;
   color: white;
   border: none;

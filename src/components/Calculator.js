@@ -9,6 +9,12 @@ const StyledCalculatorContainer = styled.div`
   border-radius: 25px 25px 0px 0px;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  max-width: 920px;
+
+  @media (min-width: 768px) {
+    border-radius: 25px;
+    box-shadow: 0px 32px 43px rgba(79, 166, 175, 0.200735);
+  }
 
   label {
     color: #5e7a7d;
@@ -30,32 +36,23 @@ const StyledCalculatorContainer = styled.div`
   }
 `;
 
-const StyledTotalsSection = styled.div`
-  background-color: #00474b;
-  border-radius: 15px;
-  padding-top: 2.3125rem;
-  padding-bottom: 1.5rem;
-  text-align: center;
-
-  p {
-    color: white;
-    font-weight: bold;
-    text-align: left;
-  }
-  span {
-    color: #7f9d9f;
-    font-size: 0.8125rem;
-  }
-`;
-
 const StyledContentContainer = styled.div`
   width: 90%;
   margin: 0 auto;
+
+  @media (min-width: 768px) {
+    display: flex;
+    gap: 2rem;
+  }
 `;
 
 const StyledInputsSection = styled.div`
   display: flex;
   flex-direction: column;
+
+  @media (min-width: 768px) {
+    flex: 1;
+  }
 `;
 
 const StyledTipContent = styled.div`
@@ -69,6 +66,28 @@ const StyledTipContent = styled.div`
     color: #26c2ae;
     font-size: 2rem;
     font-weight: bold;
+  }
+`;
+
+const StyledTotalsSection = styled.div`
+  background-color: #00474b;
+  border-radius: 15px;
+  padding-top: 2.3125rem;
+  padding-bottom: 1.5rem;
+  text-align: center;
+
+  @media (min-width: 768px) {
+    flex: 1;
+  }
+
+  p {
+    color: white;
+    font-weight: bold;
+    text-align: left;
+  }
+  span {
+    color: #7f9d9f;
+    font-size: 0.8125rem;
   }
 `;
 

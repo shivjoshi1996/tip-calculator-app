@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TipSelection from './TipSelection';
-import { roundToTwoDecimalPlace, formatter } from '../utils/currency';
+import { roundToTwoDecimalPlace } from '../utils/currency';
 import { checkIfNumber } from '../utils/validation';
 
 const StyledCalculatorContainer = styled.div`
@@ -133,35 +133,33 @@ export default function Calculator() {
   const [tipAmountPerPerson, setTipAmountPerPerson] = useState(0);
   const [totalPerPerson, setTotalPerPerson] = useState(0);
 
-  function calculateTipAmountPerPerson() {
-    const tipPerPerson = billAmount * (tipAmount / numberOfPeople);
-    const tipPerPersonRounded = roundToTwoDecimalPlace(tipPerPerson);
-
-    if (
-      checkIfNumber(tipPerPersonRounded) &&
-      Number.isFinite(tipPerPersonRounded)
-    ) {
-      setTipAmountPerPerson(tipPerPersonRounded);
-    } else {
-      setTipAmountPerPerson('N/A');
-    }
-  }
-
-  function calculateTotalPerPerson() {
-    const total = billAmount / numberOfPeople + tipAmountPerPerson;
-    const totalRounded = roundToTwoDecimalPlace(total);
-    if (checkIfNumber(totalRounded) && Number.isFinite(totalRounded)) {
-      setTotalPerPerson(totalRounded);
-    } else {
-      setTotalPerPerson('N/A');
-    }
-  }
-
   useEffect(() => {
+    function calculateTipAmountPerPerson() {
+      const tipPerPerson = billAmount * (tipAmount / numberOfPeople);
+      const tipPerPersonRounded = roundToTwoDecimalPlace(tipPerPerson);
+
+      if (
+        checkIfNumber(tipPerPersonRounded) &&
+        Number.isFinite(tipPerPersonRounded)
+      ) {
+        setTipAmountPerPerson(tipPerPersonRounded);
+      } else {
+        setTipAmountPerPerson('N/A');
+      }
+    }
     calculateTipAmountPerPerson();
   }, [billAmount, numberOfPeople, tipAmount]);
 
   useEffect(() => {
+    function calculateTotalPerPerson() {
+      const total = billAmount / numberOfPeople + tipAmountPerPerson;
+      const totalRounded = roundToTwoDecimalPlace(total);
+      if (checkIfNumber(totalRounded) && Number.isFinite(totalRounded)) {
+        setTotalPerPerson(totalRounded);
+      } else {
+        setTotalPerPerson('N/A');
+      }
+    }
     calculateTotalPerPerson();
   }, [billAmount, numberOfPeople, tipAmount, tipAmountPerPerson]);
 

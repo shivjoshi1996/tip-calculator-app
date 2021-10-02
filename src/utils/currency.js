@@ -4,9 +4,9 @@ function roundToTwoDecimalPlace(num) {
 
 // DID NOT USE BUT SHOULD REFACTOR TO USE THE METHOD BELOW INSTEAD
 
-const formatter = new Intl.NumberFormat('en-US', {
-  minimumFractionDigits: 2,
-  maximumFractionDigits: 2,
-});
+// const formatter = new Intl.NumberFormat('en-US', {
+//   minimumFractionDigits: 2,
+//   maximumFractionDigits: 2,
+// });
 
-export { roundToTwoDecimalPlace, formatter };
+export { roundToTwoDecimalPlace };

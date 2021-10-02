@@ -6,6 +6,10 @@ const StyledTipGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
 
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
   input {
     font-family: 'Space Mono', monospace;
     font-weight: bold;

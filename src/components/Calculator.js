@@ -36,6 +36,9 @@ const StyledCalculatorContainer = styled.div`
     background-color: ${({ theme }) => theme.colors.lightGrayCyan2};
     border: none;
     border-radius: 5px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
 
     &::placeholder {
       color: ${({ theme }) => theme.colors.darkCyan};

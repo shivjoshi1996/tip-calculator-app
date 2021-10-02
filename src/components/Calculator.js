@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import TipSelection from './TipSelection';
-import roundToTwoDecimalPlace from '../utils/currency';
+import { roundToTwoDecimalPlace, formatter } from '../utils/currency';
+import { checkIfNumber } from '../utils/validation';
 
 const StyledCalculatorContainer = styled.div`
   height: 100%;
@@ -35,6 +36,11 @@ const StyledCalculatorContainer = styled.div`
     background-color: ${({ theme }) => theme.colors.lightGrayCyan2};
     border: none;
     border-radius: 5px;
+
+    &::placeholder {
+      color: ${({ theme }) => theme.colors.darkCyan};
+      opacity: 0.35;
+    }
   }
 `;
 
@@ -121,8 +127,8 @@ const StyledResetButton = styled.button`
 `;
 
 export default function Calculator() {
-  const [billAmount, setBillAmount] = useState(0);
-  const [numberOfPeople, setNumberOfPeople] = useState(1);
+  const [billAmount, setBillAmount] = useState('');
+  const [numberOfPeople, setNumberOfPeople] = useState('');
   const [tipAmount, setTipAmount] = useState(0);
   const [tipAmountPerPerson, setTipAmountPerPerson] = useState(0);
   const [totalPerPerson, setTotalPerPerson] = useState(0);
@@ -130,13 +136,25 @@ export default function Calculator() {
   function calculateTipAmountPerPerson() {
     const tipPerPerson = billAmount * (tipAmount / numberOfPeople);
     const tipPerPersonRounded = roundToTwoDecimalPlace(tipPerPerson);
-    setTipAmountPerPerson(tipPerPersonRounded);
+
+    if (
+      checkIfNumber(tipPerPersonRounded) &&
+      Number.isFinite(tipPerPersonRounded)
+    ) {
+      setTipAmountPerPerson(tipPerPersonRounded);
+    } else {
+      setTipAmountPerPerson('N/A');
+    }
   }
 
   function calculateTotalPerPerson() {
     const total = billAmount / numberOfPeople + tipAmountPerPerson;
     const totalRounded = roundToTwoDecimalPlace(total);
-    setTotalPerPerson(totalRounded);
+    if (checkIfNumber(totalRounded) && Number.isFinite(totalRounded)) {
+      setTotalPerPerson(totalRounded);
+    } else {
+      setTotalPerPerson('N/A');
+    }
   }
 
   useEffect(() => {
@@ -149,12 +167,16 @@ export default function Calculator() {
 
   function handleBillInput(e) {
     const { value } = e.currentTarget;
-    setBillAmount(value);
+    if (checkIfNumber(value)) {
+      setBillAmount(value);
+    }
   }
 
   function handlePeopleInput(e) {
     const { value } = e.currentTarget;
-    setNumberOfPeople(value);
+    if (checkIfNumber(value)) {
+      setNumberOfPeople(value);
+    }
   }
 
   function handleTipInput(tip) {
@@ -163,8 +185,8 @@ export default function Calculator() {
   }
 
   function resetForm() {
-    setBillAmount(0);
-    setNumberOfPeople(1);
+    setBillAmount('');
+    setNumberOfPeople('');
     setTipAmount(0);
     setTipAmountPerPerson(0);
     setTotalPerPerson(0);
@@ -179,7 +201,7 @@ export default function Calculator() {
            }<label htmlFor="bill">Bill</label>
           <input
             type="text"
-            placeholder="Add Total Price of bill"
+            placeholder="0"
             value={billAmount}
             onChange={handleBillInput}
             id="bill"
@@ -194,12 +216,10 @@ export default function Calculator() {
             // eslint-disable-next-line
           }<label htmlFor="people">Number Of People</label>
           <input
-            type="number"
-            placeholder="Type in Group Size"
+            type="text"
+            placeholder="0"
             value={numberOfPeople}
             onChange={handlePeopleInput}
-            min="1"
-            step="1"
             id="people"
           />
         </StyledInputsSection>
